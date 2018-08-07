@@ -68,14 +68,16 @@ export default class Main extends Component<Props> {
 }
 
 function getRandomBg() {
-  var bg;
-  var count = 0;
-  for (var i in backgrounds) {
-    if (Math.random() < 1/++count) {
-      bg = backgrounds[i];
+  var keys = [];
+  for (var prop in backgrounds) {
+    if (backgrounds.hasOwnProperty(prop)) {
+        keys.push(prop);
     }
   }
-  return bg;
+
+  var imageKey = keys[keys.length * Math.random() << 0];
+
+  return backgrounds[imageKey];
 }
 
 const styles = StyleSheet.create({
