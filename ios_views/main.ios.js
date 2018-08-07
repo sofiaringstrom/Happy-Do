@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native';
+import {Platform, StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -8,37 +9,73 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const background = require('../assets/purple_pink-gradient.png');
+
+var backgrounds = {
+  'bg1': require('../assets/purple_pink-gradient.png'),
+  'bg2': require('../assets/green_blue-gradient.png'),
+  'bg3': require('../assets/green_yellow-gradient.png'),
+  'bg4': require('../assets/green-gradient.png')
+}
+
 type Props = {};
 export default class Main extends Component<Props> {
   render() {
+
+    var img = getRandomBg();
+
     return (
       <View style={styles.container}>
         <View style={styles.top}>
           <Text style={styles.appName}>HappyDo</Text>
         </View>
         <ScrollView style={styles.listContainer}>
-          <View style={styles.listItem}>
-            <Text>Titel</Text>
+          <View style={styles.topWrap}>
+            <View>
+              <Text>
+                Lägg till
+              </Text>
+            </View>
           </View>
           <View style={styles.listItem}>
-            <Text>Titel</Text>
+            <Image source={getRandomBg()} style={styles.backgroundImage} />
+            <Text style={styles.listItemText}>Titel</Text>
           </View>
           <View style={styles.listItem}>
-            <Text>Titel</Text>
+            <Image source={getRandomBg()} style={styles.backgroundImage} />
+            <Text style={styles.listItemText}>Titel</Text>
           </View>
           <View style={styles.listItem}>
-            <Text>Titel</Text>
+            <Image source={getRandomBg()} style={styles.backgroundImage} />
+            <Text style={styles.listItemText}>Titel</Text>
           </View>
           <View style={styles.listItem}>
-            <Text>Titel</Text>
+            <Image source={getRandomBg()} style={styles.backgroundImage} />
+            <Text style={styles.listItemText}>Titel</Text>
           </View>
           <View style={styles.listItem}>
-            <Text>Titel</Text>
+            <Image source={getRandomBg()} style={styles.backgroundImage} />
+            <Text style={styles.listItemText}>Titel</Text>
+          </View>
+          <View style={styles.listItem}>
+            <Image source={getRandomBg()} style={styles.backgroundImage} />
+            <Text style={styles.listItemText}>Titel</Text>
           </View>
         </ScrollView>
       </View>
     );
   }
+}
+
+function getRandomBg() {
+  var bg;
+  var count = 0;
+  for (var i in backgrounds) {
+    if (Math.random() < 1/++count) {
+      bg = backgrounds[i];
+    }
+  }
+  return bg;
 }
 
 const styles = StyleSheet.create({
@@ -53,23 +90,32 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     textAlign: 'center',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   appName: {
     alignSelf: 'center',
     fontSize: 20,
   },
   listContainer: {
-    flexDirection: "column"
+    flexDirection: "column",
+  },
+  topWrap: {
+
   },
   listItem: {
-    borderWidth: 1,
-    borderRadius: 20,
-    borderColor: '#000',
     padding: 20,
     width: 300,
     height: 150,
     alignSelf: 'center',
-    marginTop: 50
+    marginTop: 50,
+  },
+  listItemText: {
+    color: '#FFF'
+  },
+  backgroundImage: {
+    position: 'absolute',
+    width: 300,
+    height: 150,
+    justifyContent: 'center'
   }
 });
